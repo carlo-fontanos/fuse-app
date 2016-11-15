@@ -1,11 +1,28 @@
 <App>
+	<Text ux:Class="BigHeader" FontSize="40" />
+	
     <DockPanel>
+		<JavaScript>
+			var Observable = require('FuseJS/Observable');
+			var buttonText = Observable('Button');
+			var clickCount = 0;
+
+			function onClick() {
+				clickCount += 1;
+				buttonText.value = 'Clicks: ' + clickCount;
+			}
+
+			module.exports = {
+				buttonText: buttonText,
+				onClick: onClick
+			}
+		</JavaScript>
         <StatusBarBackground Dock="Top" />
         <ScrollView ClipToBounds="true">
             <StackPanel>
-                <Text FontSize="30">Hello, world!</Text>
+                <BigHeader>Welcome!</BigHeader>
                 <Slider />
-                <Button Text="Button" />
+                <Button Text="{buttonText}" Clicked="{onClick}"/>
                 <Switch Alignment="Left" />
             </StackPanel>
         </ScrollView>
