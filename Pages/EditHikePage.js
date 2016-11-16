@@ -1,4 +1,4 @@
-var Observable = require("FuseJS/Observable");
+var Context = require("Modules/Context");
 
 var hike = this.Parameter; /* Receive hike data from goToHike() in HomePage */
 
@@ -13,8 +13,14 @@ var distance = hike.map(function(x) { return x.distance; });
 var rating = hike.map(function(x) { return x.rating; });
 var comments = hike.map(function(x) { return x.comments; });
 
-function goBack() {
+function save() {
+	Context.updateHike(hike.value.id, name.value, location.value, distance.value, rating.value, comments.value);
     router.goBack();
+}
+
+function cancel() {
+	hike.value = hike.value; /* Resets any changes by getting value from the observable. */
+	router.goBack();
 }
 
 /* Make our code acciessuble in XML */
@@ -24,5 +30,7 @@ module.exports = {
 	distance: distance,
 	rating: rating,
 	comments: comments,
-	goBack: goBack
+	
+	cancel: cancel,
+	save: save
 };

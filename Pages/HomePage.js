@@ -1,4 +1,4 @@
-var hikes = require("hikes");
+var Context = require("Modules/Context");
 
 /** 
  * From the button we can get its data. On click of the button it assigns its data to our hike variable which 
@@ -10,7 +10,7 @@ function goToHike(arg) {
 }
 
 module.exports = {
-    hikes: hikes,
+    hikes: Context.hikes,
 
     goToHike: goToHike
 };
